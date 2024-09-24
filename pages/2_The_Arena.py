@@ -60,7 +60,11 @@ body_1 = col1.empty()
 body_2 = col2.empty()
 
 with bottom():
-    voting_buttons = st.empty()
+    temperature = st.slider('Temperature', min_value=0.0, max_value=1.0, value=0.7, step=0.01)
+    max_tokens = st.slider('Max Tokens', min_value=1, max_value=4000, value=1000)
+    top_p = st.slider('Top P', min_value=0.0, max_value=1.0, value=1.0, step=0.01)
+    frequency_penalty = st.slider('Frequency Penalty', min_value=0.0, max_value=2.0, value=0.0, step=0.01)
+    presence_penalty = st.slider('Presence Penalty', min_value=0.0, max_value=2.0, value=0.0, step=0.01)
     prompt = st.chat_input("Message")
     new_found = st.empty()
     with new_found.container():
@@ -137,42 +141,7 @@ async def run_prompt(placeholder, model, message_history):
 
     message_history.append({"role": "assistant", "content": streamed_text})
 
-
-def do_vote(choice):
-    st.session_state.vote = {"choice": choice}
-    voting_logger.info("Vote", model1=model_1, model2=model_2, choice=choice)
-
-    model_1_display= model_1.replace(":", "\\:")
-    model_2_display= model_2.replace(":", "\\:")
-
-    if choice == "model1":
-        vote_choice = f":blue[{model_1_display}]"
-    elif choice == "model2":
-        vote_choice = f":red[{model_2_display}]"
-    else:
-        vote_choice = ":grey[Both the same]"
-
-    st.toast(f"""##### :blue[{model_1_display}] vs :red[{model_2_display}]
-###### Vote cast: {vote_choice}""", icon='🗳️')
-
 def vote():
-    with voting_buttons.container():
-        with stylable_container(
-            key="voting_button",
-            css_styles="""
-                button {
-                    background-color: #CCCCCC;
-                    color: black;
-                    border-radius: 10px;
-                    width: 100%;
-                }
-
-                """,
-        ):
-            col1, col2, col3 = st.columns(3)
-            model1 = col1.button("Model 1 👈", key="model1", on_click=do_vote, args=["model1"])
-            model2 = col2.button("Model 2 👉", key="model2", on_click=do_vote, args=["model2"])
-            neither = col3.button("Both the same 🤝", key="same", on_click=do_vote, args=["same"])
     with new_found.container():
         with stylable_container(
             key="next_round_button",
