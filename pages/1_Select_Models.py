@@ -48,11 +48,11 @@ if len(options) > 0:
             """,
     ):
         if len(options) == 1:
-            st.write("""***""")
-            st.write("One model selected. Select one more.")
+            st.write(f"""***
+    {len(options)} model selected - Please select one more. """)
             st.stop()
         else:
             st.write(f"""***
-    {len(options)} Models selected - It's time to enter the arena! 👇""")
+    {len(options)} models selected - It's time to enter the arena! 👇""")
             if st.button("Enter the Chatbot Arena"):
                 st.switch_page("pages/2_The_Arena.py")
