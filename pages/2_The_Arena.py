@@ -60,11 +60,23 @@ body_1 = col1.empty()
 body_2 = col2.empty()
 
 with bottom():
-    temperature = st.slider('Temperature', min_value=0.0, max_value=1.0, value=0.7, step=0.01)
-    max_tokens = st.slider('Max Tokens', min_value=1, max_value=4000, value=1000)
-    top_p = st.slider('Top P', min_value=0.0, max_value=1.0, value=1.0, step=0.01)
-    frequency_penalty = st.slider('Frequency Penalty', min_value=0.0, max_value=2.0, value=0.0, step=0.01)
-    presence_penalty = st.slider('Presence Penalty', min_value=0.0, max_value=2.0, value=0.0, step=0.01)
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    with col1:
+        temperature = st.slider('Temperature', min_value=0.0, max_value=1.0, value=0.7, step=0.01)
+
+    with col2:
+        max_tokens = st.slider('Max Tokens', min_value=1, max_value=4000, value=1000)
+
+    with col3:
+        top_p = st.slider('Top P', min_value=0.0, max_value=1.0, value=1.0, step=0.01)
+
+    with col4:
+        frequency_penalty = st.slider('Frequency Penalty', min_value=0.0, max_value=2.0, value=0.0, step=0.01)
+
+    with col5:
+        presence_penalty = st.slider('Presence Penalty', min_value=0.0, max_value=2.0, value=0.0, step=0.01)
+
     prompt = st.chat_input("Message")
     new_found = st.empty()
     with new_found.container():
