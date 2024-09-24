@@ -1,0 +1,11 @@
+ollama
+openai
+streamlit
+streamlit-extras
+structlog
+watchdog
+ipython
+rich
+trueskill
+jsonlines
+pandas
