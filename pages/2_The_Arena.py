@@ -53,15 +53,15 @@ col1, col2 = st.columns(2)
 meta_1 = col1.empty()
 meta_2 = col2.empty()
 
-meta_1.write(f"## :blue[Model 1]")
-meta_2.write(f"## :red[Model 2]")
+meta_1.write(f"### :blue[Model 1: {model_1}]")
+meta_2.write(f"### :red[Model 2: {model_2}]")
 
 body_1 = col1.empty()
 body_2 = col2.empty()
 
 with bottom():
     voting_buttons = st.empty()
-    prompt = st.chat_input("Message Ollama")
+    prompt = st.chat_input("Message")
     new_found = st.empty()
     with new_found.container():
         if len(st.session_state.messages1) > 0 or len(st.session_state.messages2) > 0:
