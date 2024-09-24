@@ -16,7 +16,7 @@ from functools import partial
 voting_logger = create_logger("voting", "logs/voting.log")
 requests_logger = create_logger("requests", "logs/requests.log")
 
-title = "🏟️ The Arena"
+title = "The Arena"
 st.set_page_config(page_title=title, layout="wide")
 style_page()
 st.title(title)
@@ -27,7 +27,7 @@ if not "models" in st.session_state:
 if not "models" in st.session_state or len(st.session_state.models) < 2:
     if len(st.session_state.models) == 0:
         st.write("You haven't selected any models, so the arena won't be much use!")
-    if len(st.session_state.models) == 1:    
+    if len(st.session_state.models) == 1:
         st.write("You have only selected 1 mode. Go back and select one more!")
     if st.button("Select models"):
         st.switch_page("pages/1_Select_Models.py")
@@ -77,7 +77,7 @@ with bottom():
                     """,
             ):
                 new_round = st.button("New Round", key="new_round", on_click=clear_everything)
-            
+
 
 # Render existing state
 if "vote" in st.session_state:
@@ -132,9 +132,9 @@ async def run_prompt(placeholder, model, message_history):
                     chat_entry = st.chat_message(name=message['role'])
                     chat_entry.write(message['content'])
                 assistant = st.chat_message(name="assistant")
-                assistant.write(streamed_text)    
+                assistant.write(streamed_text)
     requests_logger.info("Request finished", id=request_id, model=model, response=streamed_text)
-                
+
     message_history.append({"role": "assistant", "content": streamed_text})
 
 
@@ -145,14 +145,14 @@ def do_vote(choice):
     model_1_display= model_1.replace(":", "\\:")
     model_2_display= model_2.replace(":", "\\:")
 
-    if choice == "model1":        
+    if choice == "model1":
         vote_choice = f":blue[{model_1_display}]"
     elif choice == "model2":
         vote_choice = f":red[{model_2_display}]"
     else:
         vote_choice = ":grey[Both the same]"
 
-    st.toast(f"""##### :blue[{model_1_display}] vs :red[{model_2_display}]    
+    st.toast(f"""##### :blue[{model_1_display}] vs :red[{model_2_display}]
 ###### Vote cast: {vote_choice}""", icon='🗳️')
 
 def vote():
@@ -198,7 +198,7 @@ async def main():
 if prompt:
     if prompt == "":
         st.warning("Please enter a prompt")
-    else:        
+    else:
         st.session_state.messages1.append({"role": "user", "content": prompt})
         st.session_state.messages2.append({"role": "user", "content": prompt})
         asyncio.run(main())

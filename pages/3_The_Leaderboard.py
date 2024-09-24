@@ -7,7 +7,7 @@ from streamlit_extras.stylable_container import stylable_container
 from trueskill import Rating, rate_1vs1
 from utils import all_chat_models, style_page
 
-title = "🏆 The Leaderboard"
+title = "The Leaderboard"
 st.set_page_config(page_title=title, layout="wide")
 style_page()
 st.title(title)
@@ -17,12 +17,12 @@ st.write("The models are ranked using Microsoft's TrueSkill algorithm.")
 models = all_chat_models()
 
 models_with_ratings = {
-  name: {
-    "size": size,
-    "rating": Rating(), 
-    "comparisons": 0
-  } 
-  for name, size in models
+    name: {
+        "size": size,
+        "rating": Rating(),
+        "comparisons": 0
+    }
+    for name, size in models
 }
 
 with jsonlines.open('logs/voting.log') as reader:
@@ -37,7 +37,7 @@ with jsonlines.open('logs/voting.log') as reader:
           m1, m2 = rate_1vs1(m1, m2)
         if row["choice"] == "model2":
           m2, m1 = rate_1vs1(m2, m1)
-        
+
         models_with_ratings[row["model1"]]["rating"] = m1
         models_with_ratings[row["model1"]]["comparisons"] += 1
 
@@ -53,5 +53,5 @@ df = pd.DataFrame({
   })
 
 st.dataframe(
-  df.sort_values(by = ["Rating"], ascending=False), hide_index=True
+    df.sort_values(by = ["Rating"], ascending=False), hide_index=True
 )
