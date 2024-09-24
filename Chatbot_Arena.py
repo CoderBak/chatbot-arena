@@ -35,11 +35,5 @@ Make sure you've got [Ollama](https://ollama.com/) running on your machine, idea
 OLLAMA_MAX_LOADED_MODELS=4 ollama serve
 ```
 
-***
-
 Let's get started!
 """)
-
-    st.page_link("pages/1_Select_Models.py", label="Select Models", icon="1️⃣")
-    st.page_link("pages/2_The_Arena.py", label="The Arena", icon="2️⃣")
-    st.page_link("pages/3_The_Leaderboard.py", label="The Leaderboard", icon="3️⃣")
